@@ -13,12 +13,12 @@ namespace APIPatrimonioEmpresa.Controllers
     [ApiController]
     public class MarcasController : ControllerBase
     {
-        private readonly MarcaRepositorio marcaRepositorio = new MarcaRepositorio();
-        // GET: api/Marca
+        private readonly MarcaRepositorio _marcaRepositorio = new MarcaRepositorio();
+
         [HttpGet]
         public IEnumerable<Marca> Get()
         {
-            var marcas = marcaRepositorio.ListarTodasMarcas().ToList();
+            var marcas = _marcaRepositorio.ListarTodasMarcas().ToList();
             return marcas;
         }
 
@@ -26,29 +26,29 @@ namespace APIPatrimonioEmpresa.Controllers
         [HttpGet("{id}", Name = "Get")]
         public IEnumerable<Marca> Get(int id)
         {
-             var marca = marcaRepositorio.FiltrarMarcas(id).ToList();
+             var marca = _marcaRepositorio.FiltrarMarcas(id).ToList();
             return marca;
         }
 
         // POST: api/Marca
         [HttpPost]
         public void Post([FromBody] Marca marca)
-        {
-             marcaRepositorio.IncluirMarca(marca);            
+        {           
+             _marcaRepositorio.IncluirMarca(marca);            
         }
 
         // PUT: api/Marca/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] Marca marca)
         {
-            marcaRepositorio.AtualizarMarca(id, marca);
+            _marcaRepositorio.AtualizarMarca(id, marca);
         }
 
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
-            marcaRepositorio.ExcluirMarca(id);
+            _marcaRepositorio.ExcluirMarca(id);
         }
     }
 }

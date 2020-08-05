@@ -56,5 +56,15 @@ namespace APIPatrimonioEmpresa.Repositorio
         {
             new Conexao().Executar("DELETE FROM Marca where marcaID = "+ id);
         }
+
+        public string VerificarNome(string nome)
+        {
+            var nomes = new Conexao().Consulta("SELECT * FROM Marca where nome = " +nome);
+            if(nomes != null)
+            {
+                return "Esse nome já existe";
+            }
+            return nome;
+        }
     }
 }

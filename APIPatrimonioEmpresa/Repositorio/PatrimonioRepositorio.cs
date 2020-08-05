@@ -19,9 +19,9 @@ namespace APIPatrimonioEmpresa.Repositorio
                 {
                     NumeroTombo = Convert.ToInt32(patrimonios.Rows[i]["numero_tombo"]),
                     Nome = patrimonios.Rows[i]["nome"].ToString(),
-                    Descricao = patrimonios.Rows[i]["descricao"].ToString()
-                };
-                patrimonio.Marcas.MarcaID = Convert.ToInt32(patrimonios.Rows[i]["marcaID"]);
+                    Descricao = patrimonios.Rows[i]["descricao"].ToString(),
+                    marcaId = Convert.ToInt32(patrimonios.Rows[i]["marcaID"])
+                };                
                 listPatrimonio.Add(patrimonio);
             }
             return listPatrimonio;
@@ -38,9 +38,9 @@ namespace APIPatrimonioEmpresa.Repositorio
                 {
                     NumeroTombo = Convert.ToInt32(patrimonios.Rows[i]["numero_tombo"]),
                     Nome = patrimonios.Rows[i]["nome"].ToString(),
-                    Descricao = patrimonios.Rows[i]["descricao"].ToString()
-                };
-                patrimonio.Marcas.MarcaID = Convert.ToInt32(patrimonios.Rows[i]["marcaID"]);
+                    Descricao = patrimonios.Rows[i]["descricao"].ToString(),
+                    marcaId = Convert.ToInt32(patrimonios.Rows[i]["marcaID"])
+                };                
                 listPatrimonio.Add(patrimonio);
             }
             return listPatrimonio;
@@ -48,17 +48,18 @@ namespace APIPatrimonioEmpresa.Repositorio
 
         public void IncluirPatrimonio(Patrimonio patrimonio)
         {
-            new Conexao().Executar("INSERT INTO Patrimonio(nome,descricao,marcaID) values('"+ patrimonio.Nome +"','"+ patrimonio.Descricao+"',"+patrimonio.Marcas.MarcaID+")");
+            new Conexao().Executar("INSERT INTO Patrimonio(nome,descricao,marcaID) values('"+ patrimonio.Nome +"','"+ patrimonio.Descricao+"',"+patrimonio.marcaId+")");
         }
 
         public void AtualizarPatrimonio(int id, Patrimonio patrimonio)
         {
-            new Conexao().Executar("UPDATE Patrimonio SET nome = '"+ patrimonio.Nome +"', descricao = '"+ patrimonio.Descricao + "',marcaID = " + patrimonio.MarcaId + " WHERE numero_tombo = " + id);
+            new Conexao().Executar("UPDATE Patrimonio SET nome = '"+ patrimonio.Nome +"', descricao = '"+ patrimonio.Descricao + "',marcaID = " + patrimonio.marcaId + " WHERE numero_tombo = " + id);
         }
 
         public void ExcluirPatrimonio(int id)
         {
             new Conexao().Executar("DELETE FROM Patrimonio WHERE numero_tombo = "+ id);
         }
+        
     }
 }

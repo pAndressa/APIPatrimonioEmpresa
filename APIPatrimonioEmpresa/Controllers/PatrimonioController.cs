@@ -16,18 +16,17 @@ namespace APIPatrimonioEmpresa.Controllers
     {
         private readonly PatrimonioRepositorio _patrimonioRepositorio = new PatrimonioRepositorio();
        
-       
         // GET: api/Patrimonio
-        [HttpGet("patrimonios")]
-        public IEnumerable<Patrimonio> Get()
+        [HttpGet]
+        public IEnumerable<Patrimonio> PatrimonioGet()
         {
             var patrimonios = _patrimonioRepositorio.ListarPatrimonios().ToList();
             return patrimonios;
         }
 
         // GET: api/Patrimonio/5
-        [HttpGet("{id}", Name = "patrimonios")]
-        public IEnumerable<Patrimonio> Get(int id)
+        [HttpGet("{id}", Name = "IdPatrimonioGet")]
+        public IEnumerable<Patrimonio> IdPatrimonioGet(int id)
         {
             var patrimonio = _patrimonioRepositorio.FiltrarPatrimonios(id).ToList();
             return patrimonio;
@@ -36,7 +35,7 @@ namespace APIPatrimonioEmpresa.Controllers
         // POST: api/Patrimonio
         [HttpPost]
         public void Post([FromBody] Patrimonio patrimonio)
-        {
+        {           
             _patrimonioRepositorio.IncluirPatrimonio(patrimonio);            
         }
 
