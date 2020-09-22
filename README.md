@@ -1,5 +1,5 @@
-# Patrimonio_empresa
-É necessário executar no Sql Server o script do arquivo 'criar tabelas no sql'
+## Patrimonio_empresa
+É necessário executar no Sql Server o script do arquivo 'criar tabelas no sql' ou se preferir segue o código abaixo
 
 ```sql
 CREATE DATABASE Patrimonio_Empresa;
