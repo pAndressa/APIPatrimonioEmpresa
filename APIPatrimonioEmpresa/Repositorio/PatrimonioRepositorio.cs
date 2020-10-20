@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace APIPatrimonioEmpresa.Repositorio
 {
-    public class PatrimonioRepositorio
+    public class PatrimonioRepositorio : IPatrimonioRepositorio
     {
         public List<Patrimonio> ListarPatrimonios()
         {
@@ -48,7 +48,12 @@ namespace APIPatrimonioEmpresa.Repositorio
 
         public void IncluirPatrimonio(Patrimonio patrimonio)
         {
-            new Conexao().Executar("INSERT INTO Patrimonio(nome,descricao,marcaID) values('"+ patrimonio.Nome +"','"+ patrimonio.Descricao+"',"+patrimonio.marcaId+")");
+            var marcasID = new Conexao().Consulta("SELECT marcaID FROM Marca where marcaID ="+patrimonio.marcaId);
+            if(!marcasID.Equals(patrimonio.marcaId))
+            {
+                new Conexao().Executar("INSERT INTO Patrimonio(nome,descricao,marcaID) values('" + patrimonio.Nome + "','" + patrimonio.Descricao + "'," + patrimonio.marcaId + ")");
+            }
+            
         }
 
         public void AtualizarPatrimonio(int id, Patrimonio patrimonio)

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace APIPatrimonioEmpresa.Repositorio
 {
-    public class MarcaRepositorio
+    public class MarcaRepositorio : IMarcaRepositorio
     {
         public List<Marca> ListarTodasMarcas()
         {

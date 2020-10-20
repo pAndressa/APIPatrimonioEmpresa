@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using APIPatrimonioEmpresa.Models;
 using APIPatrimonioEmpresa.Repositorio;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,44 +12,79 @@ namespace APIPatrimonioEmpresa.Controllers
 {
     [Route("/[controller]")]
     [ApiController]
+    [Authorize(AuthenticationSchemes = "Bearer")]
     public class MarcasController : ControllerBase
     {
         private readonly MarcaRepositorio _marcaRepositorio = new MarcaRepositorio();
 
         [HttpGet]
-        public IEnumerable<Marca> Get()
+        public ActionResult<IEnumerable<Marca>> GetMarca()
         {
-            var marcas = _marcaRepositorio.ListarTodasMarcas().ToList();
-            return marcas;
+            try
+            {
+                var marcas = _marcaRepositorio.ListarTodasMarcas().ToList();
+                return Ok(marcas);
+            }
+            catch
+            {
+                return new StatusCodeResult(500);
+            }
         }
-
-        // GET: api/Marca/5
-        [HttpGet("{id}", Name = "Get")]
-        public IEnumerable<Marca> Get(int id)
+        
+        [HttpGet("{id}", Name = "GetMarca")]
+        public ActionResult<IEnumerable<Marca>> GetMarca(int id)
         {
-             var marca = _marcaRepositorio.FiltrarMarcas(id).ToList();
-            return marca;
+            try
+            {
+                var marca = _marcaRepositorio.FiltrarMarcas(id).ToList();
+                return Ok(marca);
+            }
+            catch
+            {
+                return new StatusCodeResult(500);
+            }
         }
-
-        // POST: api/Marca
+        
         [HttpPost]
-        public void Post([FromBody] Marca marca)
-        {           
-             _marcaRepositorio.IncluirMarca(marca);            
+        public ActionResult Post([FromBody] Marca marca)
+        {
+            try
+            {
+                _marcaRepositorio.IncluirMarca(marca);
+                return new CreatedAtRouteResult("GetMarca", new { id = marca.MarcaID }, marca);
+            }
+            catch
+            {
+                return new StatusCodeResult(500);
+            }
         }
-
-        // PUT: api/Marca/5
+        
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] Marca marca)
+        public ActionResult Put(int id, [FromBody] Marca marca)
         {
-            _marcaRepositorio.AtualizarMarca(id, marca);
+            try
+            {
+                _marcaRepositorio.AtualizarMarca(id, marca);
+                return Ok();
+            }
+            catch
+            {
+                return new StatusCodeResult(500);
+            }
         }
-
-        // DELETE: api/ApiWithActions/5
+        
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public ActionResult Delete(int id)
         {
-            _marcaRepositorio.ExcluirMarca(id);
+            try
+            {
+                _marcaRepositorio.ExcluirMarca(id);
+                return Ok();
+            }
+            catch
+            {
+                return new StatusCodeResult(500);
+            }
         }
     }
 }
