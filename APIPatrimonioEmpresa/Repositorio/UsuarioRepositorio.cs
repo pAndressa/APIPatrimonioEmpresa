@@ -13,12 +13,9 @@ namespace APIPatrimonioEmpresa.Repositorio
 
         }
         public void IncluirUsuario(Usuario usuario)
-        {
-            var user = new Conexao().Consulta("SELECT email FROM usuario where email ='" + usuario.Email + "'");
-            if (user == null )
-            {
-                new Conexao().Executar("INSERT INTO usuario(nome,email,senha) values('" + usuario.Nome + "','" + usuario.Email + "','" + usuario.Senha + "')");
-            }          
+        {             
+            new Conexao().Executar("INSERT INTO usuario(nome,email,senha) values('" + usuario.Nome + "','" + usuario.Email + "','" + usuario.Senha + "')");
+                   
         }
 
         public List<Usuario> LoginUsuario(Usuario usuario)

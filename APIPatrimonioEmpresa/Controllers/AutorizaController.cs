@@ -16,7 +16,8 @@ using Microsoft.IdentityModel.Tokens;
 namespace APIPatrimonioEmpresa.Controllers
 {
     [Route("[controller]")]
-    [ApiController]    
+    [ApiController]
+    [AllowAnonymous]
     public class AutorizaController : ControllerBase
     {
         private readonly IConfiguration _configuration;
@@ -27,7 +28,7 @@ namespace APIPatrimonioEmpresa.Controllers
             _configuration = configuration;
         }        
         
-        [HttpPost]
+        [HttpPost("registrar")]
         public ActionResult RegitrarUsuario([FromBody] Usuario usuario)
         {
             try
@@ -41,13 +42,19 @@ namespace APIPatrimonioEmpresa.Controllers
                 return BadRequest(ModelState);
             }
         }
-        [AllowAnonymous]
+        
         [HttpPost("login")]
         public IActionResult LoginUsuario([FromBody]Usuario usuario)
         {
-           
+            try
+            {
                 _usuarioRepositorio.LoginUsuario(usuario);
                 return Ok(GeraToken(usuario));
+            }
+            catch
+            {
+                return new StatusCodeResult(401);
+            }
           
         }        
         
