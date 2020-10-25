@@ -1,4 +1,4 @@
-## Patrimonio_empresa
+## Patrimonio_empresa e exercício 1
 É necessário executar no Sql Server na versão 2012 o script a baixo para a criação das tabelas no banco de dados, executar na mesa ordem.
 
 ```sql
@@ -31,3 +31,7 @@ Também é utilizado o JWT para autenticação ( Microsoft.AspNetCore.Authentica
 Para se autenticar é neccessário cadastrar um login, ou seja se registrar, utilizando o controller Autoriza.
 Não foi utilizado o Swagger, para testar recomendo o uso do postman.
 
+### Exercicício1 
+<p>nesse projeto feito em console também na versão .NET 3.1, é um algoritmo que irá exibir o maior número baseado na sequência de números informada</p>
+
+São 2 projetos diferentes que estão na mesma solution.
