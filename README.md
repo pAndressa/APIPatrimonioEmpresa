@@ -29,4 +29,5 @@ CREATE TABLE usuario(
 Também é utilizado o JWT para autenticação ( Microsoft.AspNetCore.Authentication.Core/2.2.0 , Microsoft.AspNetCore.Authentication.JwtBearer/3.1.9 ), o NewtonsofJson
 (Microsoft.AspNetCore.Mvc.NewtonsoftJson/3.1.9 ), SQLClient ( System.Data.SqlClient/4.8.2 ).
 Para se autenticar é neccessário cadastrar um login, ou seja se registrar, utilizando o controller Autoriza.
-Não foi utilizado o Swagger, para testar recomendo o uso do postman
+Não foi utilizado o Swagger, para testar recomendo o uso do postman.
+
