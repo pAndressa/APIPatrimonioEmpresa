@@ -1,5 +1,5 @@
 ## Patrimonio_empresa e exercício 1
-É necessário executar no Sql Server na versão 2012 o script a baixo para a criação das tabelas no banco de dados, executar na mesa ordem.
+É necessário executar no Sql Server na versão 2012 o script a baixo para a criação das tabelas no banco de dados, executar na mesma ordem.
 
 ```sql
 CREATE DATABASE Patrimonio_Empresa;
