@@ -17,7 +17,7 @@ namespace APIPatrimonioEmpresa.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    [AllowAnonymous]
+    
     public class AutorizaController : ControllerBase
     {
         private readonly IConfiguration _configuration;
@@ -33,8 +33,19 @@ namespace APIPatrimonioEmpresa.Controllers
         {
             try
             {
-                _usuarioRepositorio.IncluirUsuario(usuario);
-                return Ok(GeraToken(usuario));                
+                var verificaEmail = _usuarioRepositorio.VerificaEmail().Exists(u => u.Email == usuario.Email);
+
+                if(verificaEmail == false)
+                {
+                    _usuarioRepositorio.IncluirUsuario(usuario);
+                    return Ok(GeraToken(usuario));
+                }
+                else
+                {
+                    ModelState.AddModelError(string.Empty, "Não é possível cadastrar pois esse e-mail já existe em nossa base de dados");
+                    return BadRequest(ModelState);
+                }
+                              
             }
             catch
             {
@@ -42,7 +53,8 @@ namespace APIPatrimonioEmpresa.Controllers
                 return BadRequest(ModelState);
             }
         }
-        
+
+        [AllowAnonymous]
         [HttpPost("login")]
         public IActionResult LoginUsuario([FromBody]Usuario usuario)
         {

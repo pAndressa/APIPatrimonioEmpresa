@@ -24,6 +24,7 @@ namespace APIPatrimonioEmpresa.Repositorio
             }
             return listMarcas;
         }
+        
 
         public List<Marca> FiltrarMarcas(int id)
         {

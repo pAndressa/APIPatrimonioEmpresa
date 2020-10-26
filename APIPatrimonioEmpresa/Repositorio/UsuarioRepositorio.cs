@@ -34,5 +34,21 @@ namespace APIPatrimonioEmpresa.Repositorio
             }
             return listUsuario;
         }
+
+        public List<Usuario> VerificaEmail()
+        {
+            var user = new Conexao().Consulta("SELECT email FROM usuario ");
+
+            List<Usuario> listEmailUsuario = new List<Usuario>();
+            for (int i = 0; i < user.Rows.Count; i++)
+            {
+                Usuario usuarios = new Usuario
+                {
+                    Email = user.Rows[i]["email"].ToString(),                    
+                };
+                listEmailUsuario.Add(usuarios);
+            }
+            return listEmailUsuario;
+        }
     }
 }

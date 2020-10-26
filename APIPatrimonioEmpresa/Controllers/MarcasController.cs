@@ -21,7 +21,7 @@ namespace APIPatrimonioEmpresa.Controllers
         public ActionResult<IEnumerable<Marca>> GetMarca()
         {
             try
-            {
+            {                
                 var marcas = _marcaRepositorio.ListarTodasMarcas().ToList();
                 return Ok(marcas);
             }
@@ -50,8 +50,19 @@ namespace APIPatrimonioEmpresa.Controllers
         {
             try
             {
-                _marcaRepositorio.IncluirMarca(marca);
-                return new CreatedAtRouteResult("GetMarca", new { id = marca.MarcaID }, marca);
+                var verificaNome = _marcaRepositorio.ListarTodasMarcas().Exists(n => n.Nome == marca.Nome);
+
+                if(verificaNome == false)
+                {
+                    _marcaRepositorio.IncluirMarca(marca);
+                    return new CreatedAtRouteResult("GetMarca", new { id = marca.MarcaID }, marca);
+                }
+                else
+                {
+                    ModelState.AddModelError(string.Empty, "Não é possível cadastrar pois esse nome já existe em nossa base de dados");
+                    return BadRequest(ModelState);
+                }
+               
             }
             catch
             {
