@@ -35,7 +35,7 @@ namespace APIPatrimonioEmpresa.Controllers
             {
                 var verificaEmail = _usuarioRepositorio.VerificaEmail().Exists(u => u.Email == usuario.Email);
 
-                if(verificaEmail == false)
+                if(!verificaEmail)
                 {
                     _usuarioRepositorio.IncluirUsuario(usuario);
                     return Ok(GeraToken(usuario));

@@ -16,7 +16,11 @@ namespace APIPatrimonioEmpresa.Controllers
     [Authorize(AuthenticationSchemes = "Bearer")]
     public class PatrimonioController : ControllerBase
     {
-        private readonly PatrimonioRepositorio _patrimonioRepositorio = new PatrimonioRepositorio();
+        private readonly IPatrimonioRepositorio _patrimonioRepositorio;
+        public PatrimonioController(IPatrimonioRepositorio patrimonioRepositorio)
+        {
+            _patrimonioRepositorio = patrimonioRepositorio;
+        }
        
         // GET: api/Patrimonio
         [HttpGet]

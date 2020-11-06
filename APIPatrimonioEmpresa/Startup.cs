@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using APIPatrimonioEmpresa.Repositorio;
 using AutoMapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -28,6 +29,9 @@ namespace APIPatrimonioEmpresa
         
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddTransient<IMarcaRepositorio, MarcaRepositorio>();
+            services.AddTransient<IPatrimonioRepositorio, PatrimonioRepositorio>();
+
             var key = Encoding.ASCII.GetBytes(Configuration["Jwt:key"]);
             services.AddAuthentication(x =>
             {

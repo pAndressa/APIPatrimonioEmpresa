@@ -15,7 +15,12 @@ namespace APIPatrimonioEmpresa.Controllers
     [Authorize(AuthenticationSchemes = "Bearer")]
     public class MarcasController : ControllerBase
     {
-        private readonly MarcaRepositorio _marcaRepositorio = new MarcaRepositorio();
+        private readonly IMarcaRepositorio _marcaRepositorio;
+
+        public MarcasController(IMarcaRepositorio marcaRepositorio)
+        {
+            _marcaRepositorio = marcaRepositorio;
+        }
 
         [HttpGet]
         public ActionResult<IEnumerable<Marca>> GetMarca()
@@ -52,7 +57,7 @@ namespace APIPatrimonioEmpresa.Controllers
             {
                 var verificaNome = _marcaRepositorio.ListarTodasMarcas().Exists(n => n.Nome == marca.Nome);
 
-                if(verificaNome == false)
+                if(!verificaNome)
                 {
                     _marcaRepositorio.IncluirMarca(marca);
                     return new CreatedAtRouteResult("GetMarca", new { id = marca.MarcaID }, marca);
