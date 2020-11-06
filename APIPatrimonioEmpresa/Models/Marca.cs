@@ -8,10 +8,21 @@ namespace APIPatrimonioEmpresa.Models
 {
     public class Marca
     {
-        public int MarcaID { get; set; }
+        private int _MarcaID;
+        private string _Nome;
 
-        [Required (ErrorMessage ="O preenchimento do nome é obrigatório")]
-        public string Nome { get; set; }
+        public int MarcaID
+        {
+            get { return _MarcaID; }
+            set { _MarcaID = value; }
+        }       
+
+        [Required(ErrorMessage = "O preenchimento do nome é obrigatório")]
+        public string Nome
+        {
+            get { return _Nome; }
+            set { _Nome = value; }
+        }
 
         public Marca()
         {
